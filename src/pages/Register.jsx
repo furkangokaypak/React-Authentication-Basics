@@ -10,6 +10,7 @@ const Register = () => {
     passwordAgain: "",
     acceptTerms: false,
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,10 +40,11 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Registration successful:", data);
-        // Başarılı kayıt sonrası yapılacak işlemler
+        navigate("/"); // Redirect on success
+        // Actions to take after successful registration
       } else {
         console.error("Registration failed:", response.statusText);
-        // Hata durumu için işlem
+        // Handle error state
       }
     } catch (error) {
       console.error("Error:", error);

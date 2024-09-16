@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // React Router kullanıyorsanız
+import { useNavigate } from "react-router-dom"; // If using React Router
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -7,7 +7,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Başarıyla giriş yaptıktan sonra yönlendirme
+  const navigate = useNavigate(); // Redirect after successful login
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Varsayılan form davranışını engelle
+    e.preventDefault(); // Prevent default form behavior
 
     try {
       const response = await fetch("http://localhost:5000/login", {
@@ -27,11 +27,11 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-        credentials: "include", // Oturum yönetimi için çerezleri dahil et
+        credentials: "include", // Include cookies for session management
       });
 
       if (response.ok) {
-        navigate("/"); // Başarı durumunda yönlendir
+        navigate("/"); // Redirect on success
       } else {
         const data = await response.json();
         setError(data.message || "Login failed");
